@@ -37,19 +37,28 @@ class PasswordViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if Auth.auth().currentUser == nil {
-            Auth.auth().signInAnonymously { (user, error) in
-                if error == nil {
-                    print("You are now signed in using Anonymous auth. uid: \(user?.uid)")
-                } else {
-                    print("Error with anonymous auth: ")
-                    self.setupFirebaseObservers()
-                }
-            }
-        } else {
-            print("You are already signed in as: \(Auth.auth().currentUser?.uid)")
-            setupFirebaseObservers()
-        }
+        
+//        try! Auth.auth().signOut()
+//        do {
+//         try Auth.auth().signOut()
+//        } catch {
+//            print("Error signing out: \(error.localizedDescription)")
+//        }
+//
+//        if Auth.auth().currentUser == nil {
+//            Auth.auth().signInAnonymously { (user, error) in
+//                if error == nil {
+//                    print("You are now signed in using Anonymous auth. uid: \(user?.uid)")
+//                    self.setupFirebaseObservers()
+//                } else {
+//                    print("Error with anonymous auth: ")
+//                }
+//            }
+//        } else {
+//            print("You are already signed in as: \(Auth.auth().currentUser?.uid)")
+//            self.setupFirebaseObservers()
+//        }
+        setupFirebaseObservers()
         
         passwords.removeAll()
         passwordListener = currentUserCollectionRef.order(by: "service", descending: true)
