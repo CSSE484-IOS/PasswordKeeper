@@ -10,8 +10,9 @@ import UIKit
 import Material
 import Firebase
 import Rosefire
+import GoogleSignIn
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, GIDSignInUIDelegate {
     
     let rosefireRegistryToken = "767e4f49-876d-45cc-9a14-766a36648dc2"
 
@@ -22,13 +23,16 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var passwordTextField: TextField!
 
   @IBOutlet weak var rosefireLoginButton: RaisedButton!
-  @IBOutlet weak var googleLoginButton: UIView!
-  //  @IBOutlet weak var googleLoginButton: GIDSignInButton!
+//  @IBOutlet weak var googleLoginButton: UIView!
+    @IBOutlet weak var googleLoginButton: GIDSignInButton!
 
 
   override func viewDidLoad() {
     super.viewDidLoad()
     prepareView()
+    
+    GIDSignIn.sharedInstance().uiDelegate = self
+    googleLoginButton.style = .wide
   }
 
   func prepareView() {
